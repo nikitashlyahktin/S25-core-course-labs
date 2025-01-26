@@ -47,7 +47,70 @@ Access the API endpoint:
 curl http://localhost:8080/price
 ```
 
-### Example Response
+## Docker
+
+Docker helps to run the application without managing application dependencies by yourself.
+
+You can either build your own docker image from `Dockerfile` or use prebuilt image from docker hub.
+Then you can run the container and use the app.
+
+### Docker Prerequisites
+
+- Docker engine (e.g. Docker Desktop or Colima) installed and running
+
+### Build Image
+
+Use the following command in `app_go` directory to build the image from `Dockerfile`:
+
+```bash
+docker build -t crypto_price_tracker .
+```
+
+### Pull Prebuilt Image
+
+Use the following command to pull prebuilt image from docker hub:
+
+```bash
+docker pull nshlyakhtin/devops:lab2_app_go
+```
+
+### Run Container
+
+```bash
+docker run -p 8080:8080 crypto_price_tracker
+# or for prebuilt image:
+docker run -p 8080:8080 nshlyakhtin/devops:lab2_app_go
+```
+
+## Distroless Image Version
+
+You can use smaller and more secure distroless docker image for running the application
+
+### Build Distroless Image
+
+Use the following command in `app_go` directory to build the image from `distroless.Dockerfile`:
+
+```bash
+docker build -f distroless.Dockerfile -t crypto_price_tracker_distroless .
+```
+
+### Pull Prebuilt Distroless Image
+
+Use the following command to pull prebuilt image from docker hub:
+
+```bash
+docker pull nshlyakhtin/devops:lab2_app_go_distroless
+```
+
+### Run Container With Distroless Image
+
+```bash
+docker run -p 8080:8080 crypto_price_tracker_distroless
+# or for prebuilt image:
+docker run -p 8080:8080 nshlyakhtin/devops:lab2_app_go_distroless
+```
+
+## Example Response
 
 ```json
 [
