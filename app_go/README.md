@@ -1,5 +1,7 @@
 # Crypto Price Tracker
 
+![CI](https://github.com/nikitashlyahktin/S25-core-course-labs/actions/workflows/go-app.yml/badge.svg)
+
 Web application that provides real-time cryptocurrency prices in JSON format using Binance API.
 
 ## Features
@@ -150,3 +152,26 @@ docker run -p 8080:8080 nshlyakhtin/devops:lab2_app_go_distroless
 ## Documentation
 
 See [GO.md](GO.md) for technical implementation details
+
+## Unit Tests
+
+This application supports Unit Tests.
+
+Run Unit Tests using following command:
+
+```bash
+make test
+```
+
+## Continuous Integration (CI)
+
+This project uses GitHub Actions to automate testing and deployment.
+
+### CI Workflow Steps
+
+1. Install Dependencies: The workflow installs all required dependencies from `requirements.txt`.
+2. Run Linter: The `black` linter checks the code formatting.
+3. Run Tests: Unit tests are executed with `pytest`.
+4. Docker Login, Build & Push: The application is built as a Docker image and pushed to Docker Hub.
+
+Full CI config is located at `.github/workflows/go-app.yml`.
