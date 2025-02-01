@@ -1,5 +1,7 @@
 # Moscow Time Web Application
 
+![CI](https://github.com/nikitashlyahktin/S25-core-course-labs/actions/workflows/python-app.yml/badge.svg)
+
 Web application that returns current Moscow time in JSON format.
 
 ## Features
