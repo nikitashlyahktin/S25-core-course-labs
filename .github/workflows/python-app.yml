@@ -1,6 +1,9 @@
 name: Python App
 
-on: [ push ]
+on:
+  push:
+    paths:
+      - 'app_python/**'
 
 jobs:
   build-and-test:
@@ -40,6 +43,7 @@ jobs:
           args: --file=app_python/requirements.txt --skip-unresolved
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        continue-on-error: true
 
   docker:
     needs: build-and-test

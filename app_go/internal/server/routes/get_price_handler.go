@@ -1,15 +1,15 @@
 package routes
 
 import (
+	"app_go/internal/http_client"
 	"encoding/json"
 	"fmt"
-	"github.com/labstack/echo/v4"
 	"io"
 	"net/http"
 	"time"
-)
 
-const getPriceTimeout = 5 * time.Second
+	"github.com/labstack/echo/v4"
+)
 
 type PriceResponse struct {
 	Pair        string `json:"pair"`
@@ -24,44 +24,48 @@ type TickerResponse struct {
 	PriceChangePercent string `json:"priceChangePercent"`
 }
 
-func GetPriceHandler(c echo.Context) error {
-	client := &http.Client{Timeout: getPriceTimeout}
+func GetPriceHandler(client http_client.HTTPClient) func(c echo.Context) error {
+	return func(c echo.Context) error {
+		// Fetch BTC/USDT data
+		btcData, err := fetchPairData(client, "BTCUSDT")
+		if err != nil {
+			return c.JSON(
+				http.StatusInternalServerError, map[string]string{
+					"error": "failed to fetch BTC/USDT data",
+				},
+			)
+		}
 
-	// Fetch BTC/USDT data
-	btcData, err := fetchPairData(client, "BTCUSDT")
-	if err != nil {
-		return c.JSON(http.StatusInternalServerError, map[string]string{
-			"error": "failed to fetch BTC/USDT data",
-		})
+		// Fetch ETH/USDT data
+		ethData, err := fetchPairData(client, "ETHUSDT")
+		if err != nil {
+			return c.JSON(
+				http.StatusInternalServerError, map[string]string{
+					"error": "failed to fetch ETH/USDT data",
+				},
+			)
+		}
+
+		resp := []PriceResponse{
+			{
+				Pair:        "BTC/USDT",
+				Price:       btcData.LastPrice,
+				Change24h:   btcData.PriceChangePercent,
+				LastUpdated: time.Now().UTC().Format(time.RFC3339),
+			},
+			{
+				Pair:        "ETH/USDT",
+				Price:       ethData.LastPrice,
+				Change24h:   ethData.PriceChangePercent,
+				LastUpdated: time.Now().UTC().Format(time.RFC3339),
+			},
+		}
+
+		return c.JSON(http.StatusOK, resp)
 	}
-
-	// Fetch ETH/USDT data
-	ethData, err := fetchPairData(client, "ETHUSDT")
-	if err != nil {
-		return c.JSON(http.StatusInternalServerError, map[string]string{
-			"error": "failed to fetch ETH/USDT data",
-		})
-	}
-
-	resp := []PriceResponse{
-		{
-			Pair:        "BTC/USDT",
-			Price:       btcData.LastPrice,
-			Change24h:   btcData.PriceChangePercent,
-			LastUpdated: time.Now().UTC().Format(time.RFC3339),
-		},
-		{
-			Pair:        "ETH/USDT",
-			Price:       ethData.LastPrice,
-			Change24h:   ethData.PriceChangePercent,
-			LastUpdated: time.Now().UTC().Format(time.RFC3339),
-		},
-	}
-
-	return c.JSON(http.StatusOK, resp)
 }
 
-func fetchPairData(client *http.Client, symbol string) (*TickerResponse, error) {
+func fetchPairData(client http_client.HTTPClient, symbol string) (*TickerResponse, error) {
 	url := fmt.Sprintf("https://api.binance.com/api/v3/ticker/24hr?symbol=%s", symbol)
 	resp, err := client.Get(url)
 	if err != nil {

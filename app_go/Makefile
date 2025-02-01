@@ -40,4 +40,7 @@ watch:
             fi; \
         fi
 
+mocks:
+	@mockgen -source=internal/http_client/client.go -destination=internal/mocks/mock_http_client.go -package=mock_http_client
+
 .PHONY: all build run test clean watch
