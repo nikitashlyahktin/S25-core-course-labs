@@ -1,4 +1,6 @@
-# Lab 1: Web Application Development
+# Python Web Application
+
+## Lab 1: Web Application Development
 
 ## Task 1: Python Web Application
 
@@ -32,7 +34,9 @@ To test web application I used debug mode in Flask and
 made several `GET http://127.0.0.1:5000` requests via web browser.
 Requests return current time in Moscow timezone as expected.
 
-# Lab 3: Continuous Integration Lab
+--
+
+## Lab 3: Continuous Integration Lab
 
 ## Task 1: Code Testing and Git Actions CI
 
@@ -41,10 +45,10 @@ This application uses unit tests written with [pytest](https://docs.pytest.org).
 ## Overview of Unit Tests
 
 - **test_moscow_time:** This test checks the "/" endpoint.
-    - It checks that the server returns a 200 status code.
-    - It ensures that the JSON response contains the keys "timezone" and "current_time".
-    - It validates that the "timezone" value is "Europe/Moscow".
-    - It confirms that "current_time" follows the format "YYYY-MM-DD HH:MM:SS" using a regular expression.
+  - It checks that the server returns a 200 status code.
+        - It ensures that the JSON response contains the keys "timezone" and "current_time".
+        - It validates that the "timezone" value is "Europe/Moscow".
+        - It confirms that "current_time" follows the format "YYYY-MM-DD HH:MM:SS" using a regular expression.
 
 ## Best Practices Applied for Unit Tests
 

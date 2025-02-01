@@ -143,7 +143,7 @@ pytest
 
 This project uses GitHub Actions to automate testing and deployment.
 
-### CI Workflow Steps:
+### CI Workflow Steps
 
 1. Install Dependencies: The workflow installs all required dependencies from `requirements.txt`.
 2. Run Linter: The `black` linter checks the code formatting.
@@ -151,4 +151,3 @@ This project uses GitHub Actions to automate testing and deployment.
 4. Docker Login, Build & Push: The application is built as a Docker image and pushed to Docker Hub.
 
 Full CI config is located at `.github/workflows/python-app.yml`.
-
