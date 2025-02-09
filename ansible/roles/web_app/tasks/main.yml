@@ -13,7 +13,7 @@
         state: started
         restart_policy: always
         published_ports:
-          - "{{ app_port }}:5000"
+          - "{{ app_port }}:{{ container_port }}"
       tags: [docker]
 
     - name: Create directory for docker-compose file
