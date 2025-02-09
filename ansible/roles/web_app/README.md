@@ -1,38 +1,33 @@
-Role Name
-=========
+# Web App Role
 
-A brief description of the role goes here.
+This custom role pulls the application's Docker image and configures the container.
+The role also deploys custom docker-compose config and provides wipe tasks, which can be run
+separately with `wipe` tag or enabled by default with `web_app_full_wipe=true`.
 
-Requirements
-------------
+## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+- Ansible 2.9+
+- Docker installed via the dependent `docker` role
+- Ubuntu 22.04
 
-Role Variables
---------------
+## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+- `docker_image`: Docker image to deploy from Docker Hub (I use `nshlyakhtin/devops:lab2-amd64` python web app from
+  lab2).
+- `container_name`: Name for the container.
+- `app_port`: Host port to map to container port 5000.
+- `web_app_full_wipe`: Set to true to remove the container and related files.
 
-Dependencies
-------------
+## Tasks
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+- **Deploy Web App:** Pulls the image and starts the container.
+- **Docker Compose:** Generates a docker-compose.yml from a Jinja2 template.
+- **Wipe Logic:** Removes the container and docker-compose file when enabled.
 
-Example Playbook
-----------------
+## Example Playbook
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+```yaml
+- hosts: all
+  become: yes
+  roles:
+    - role: web_app
