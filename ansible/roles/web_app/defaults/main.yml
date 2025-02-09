@@ -1,0 +1,4 @@
+docker_image: "nshlyakhtin/devops:lab2-amd64"
+container_name: "web_app_python"
+host_port: 5001
+container_port: 5000
