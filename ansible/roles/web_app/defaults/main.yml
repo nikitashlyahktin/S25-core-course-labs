@@ -1,4 +1,1 @@
-docker_image: "nshlyakhtin/devops:lab2-amd64"
-container_name: "web_app_python"
-app_port: 5000
 web_app_full_wipe: false
