@@ -1,0 +1,14 @@
+- name: Pull the web app Docker image
+  community.docker.docker_image:
+    name: "{{ docker_image }}"
+    source: pull
+
+- name: Start the web app container
+  community.docker.docker_container:
+    name: "{{ container_name }}"
+    image: "{{ docker_image }}"
+    state: started
+    restart_policy: always
+    published_ports:
+      - "{{ host_port }}:{{ container_port }}"
+    platform: linux/amd64
