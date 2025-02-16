@@ -56,3 +56,16 @@ The screenshot demonstrates the successful operation of the logging stack by sho
   and the application's GET request logs
 
 ![lab7_grafana.png](lab7_grafana.png)
+
+## Bonus Task: Additional Configuration
+
+The screenshot demonstrates the successful operation of the logging stack with 
+my additional crypto_price_tracker Golang application by showing:
+
+- The Grafana interface with active log panels
+- Five panels, each filtered by the `service` label, representing logs from Loki,
+  Grafana, Promtail, app_python and app_go containers
+- Each log stream panel shows active logs, such as Loki's startup logs, Grafana's access logs (admin login),
+  and the application's GET requests logs
+
+![lab7_bonus_grafana.png](lab7_bonus_grafana.png)

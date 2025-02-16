@@ -37,5 +37,12 @@ services:
     depends_on:
       - loki
 
+  crypto_price_tracker:
+    image: nshlyakhtin/devops:lab2_app_go
+    ports:
+      - "8080:8080"
+    depends_on:
+      - loki
+
 volumes:
   grafana-storage:
