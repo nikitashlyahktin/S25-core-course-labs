@@ -47,8 +47,20 @@ loki:
 
 The configurations updated for other services are identical.
 
-The following screenshot from Prometheus targets panel demonstrates that now all services are connected 
-to Prometheus monitoring. However, Prometheus counts "moscow-time-app" and "crypto_price_tracker" 
+The following screenshot from Prometheus targets panel demonstrates that now all services are connected
+to Prometheus monitoring. However, Prometheus counts "moscow-time-app" and "crypto_price_tracker"
 as down because they don't expose `/metrics` endpoint (yet).
 
 ![lab8_task2_prometheus_targets.png](lab8_task2_prometheus_targets.png)
+
+## Bonus Task: Metrics and Health Checks
+
+The following screenshots from Prometheus UI shows that app_python (moscow_time_app)
+and app_go (crypto_price_tracker) are properly configured with Prometheus client, up and
+provide metrics at `/metrics` endpoint:
+
+![lab8_bonus_prometheus_targets.png](lab8_bonus_prometheus_targets.png)
+
+![lab8_bonus_prometheus_app_python.png](lab8_bonus_prometheus_app_python.png)
+
+![lab8_bonus_prometheus_app_go.png](lab8_bonus_prometheus_app_go.png)

@@ -2,6 +2,7 @@ package routes
 
 import (
 	"app_go/internal/http_client"
+	"app_go/internal/metrics"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -26,6 +27,8 @@ type TickerResponse struct {
 
 func GetPriceHandler(client http_client.HTTPClient) func(c echo.Context) error {
 	return func(c echo.Context) error {
+		metrics.PriceRequestCounter.Inc()
+
 		// Fetch BTC/USDT data
 		btcData, err := fetchPairData(client, "BTCUSDT")
 		if err != nil {
