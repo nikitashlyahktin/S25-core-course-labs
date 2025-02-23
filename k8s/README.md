@@ -20,8 +20,23 @@ In this task, I:
 
 ## Task 2: Declarative Kubernetes Manifests
 
-In this task I created a `Deployement` and `Service` with manifest files:
+In this task I created a `Deployment` and `Service` with manifest files:
 
 ![create_deployment_and_service_with_manifest.png](screenshots/create_deployment_and_service_with_manifest.png)
 ![minikube_tunnel.png](screenshots/minikube_tunnel.png)
 ![minikube_tunnel_output.png](screenshots/minikube_tunnel_output.png)
+
+## Bonus Task: Additional Configuration and Ingress
+
+In this task I added the `Deployment` and `Service` manifest files for my app_go crypto-price-tracker app
+and added `Ingress` manifest to expose 2 apps (app_python and app_go) from k8s cluster network:
+
+![2_apps_deployment.png](screenshots/2_apps_deployment.png)
+
+The apps can be accessed with `localhost` base URL and `/time` endpoint to access `moscow-time-app`
+or `/crypto/price` to access `crypto-price-tracker`. It is important to note that applications are accessed
+through `minikube tunnel` because of `Docker Desktop` limitations on `MacOS`:
+
+![app_python_ingress.png](screenshots/app_python_ingress.png)
+
+![app_go_ingress.png](screenshots/app_go_ingress.png)
