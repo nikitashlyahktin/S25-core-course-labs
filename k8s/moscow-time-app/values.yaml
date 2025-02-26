@@ -9,3 +9,6 @@ service:
   targetPort: 5000
 
 containerPort: 5000
+
+secrets:
+  my_secret: "qwerty"
