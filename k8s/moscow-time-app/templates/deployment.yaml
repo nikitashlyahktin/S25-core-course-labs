@@ -13,6 +13,7 @@ spec:
       labels:
         {{- include "moscow-time-app.selectorLabels" . | nindent 8 }}
     spec:
+      serviceAccountName: internal-app
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
