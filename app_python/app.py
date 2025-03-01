@@ -29,6 +29,7 @@ def metrics():
     increment_visits()
     return Response(generate_latest(), mimetype=CONTENT_TYPE_LATEST)
 
+
 @app.route("/visits")
 def visits():
     data = {
@@ -40,7 +41,7 @@ def visits():
 
 def increment_visits():
     try:
-        with open('visits.txt', 'r') as f:
+        with open("visits.txt", "r") as f:
             count = int(f.read().strip() or 0)
     except FileNotFoundError:
         print("visits files not found")
@@ -48,13 +49,13 @@ def increment_visits():
 
     count += 1
 
-    with open('visits.txt', 'w') as f:
+    with open("visits.txt", "w") as f:
         f.write(str(count))
 
 
 def read_visits():
     try:
-        with open('visits.txt', 'r') as f:
+        with open("visits.txt", "r") as f:
             count = int(f.read().strip() or 0)
     except FileNotFoundError:
         print("visits files not found")
