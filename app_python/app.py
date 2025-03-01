@@ -10,6 +10,7 @@ REQUEST_COUNT = Counter("request_count", "Requests Counter", ["method", "endpoin
 
 @app.route("/")
 def moscow_time():
+    increment_visits()
     REQUEST_COUNT.labels(method="GET", endpoint="/").inc()
 
     tz = pytz.timezone("Europe/Moscow")
@@ -25,7 +26,41 @@ def moscow_time():
 
 @app.route("/metrics")
 def metrics():
+    increment_visits()
     return Response(generate_latest(), mimetype=CONTENT_TYPE_LATEST)
+
+@app.route("/visits")
+def visits():
+    data = {
+        "visits": read_visits(),
+    }
+
+    return jsonify(data)
+
+
+def increment_visits():
+    try:
+        with open('visits.txt', 'r') as f:
+            count = int(f.read().strip() or 0)
+    except FileNotFoundError:
+        print("visits files not found")
+        count = 0
+
+    count += 1
+
+    with open('visits.txt', 'w') as f:
+        f.write(str(count))
+
+
+def read_visits():
+    try:
+        with open('visits.txt', 'r') as f:
+            count = int(f.read().strip() or 0)
+    except FileNotFoundError:
+        print("visits files not found")
+        count = 0
+
+    return count
 
 
 if __name__ == "__main__":
