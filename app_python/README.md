@@ -129,6 +129,23 @@ app_python/
 
 See [PYTHON.md](PYTHON.md) for technical implementation details.
 
+## Visits Counter
+
+The number of application accesses is persistently stored in `visits` file.
+You can access the visits counter using `GET /visits` endpoint.
+
+Example Response:
+
+```json
+{
+  "visits": 7
+}
+```
+
+Proof of persistent visits storage with Docker Volumes:
+
+![lab12_task1_proof.png](lab12_task1_proof.png)
+
 ## Unit Tests
 
 This application supports Unit Tests.
