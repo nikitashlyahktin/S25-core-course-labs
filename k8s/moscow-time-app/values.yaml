@@ -11,4 +11,4 @@ service:
 containerPort: 5000
 
 secrets:
-  my_secret: "qwerty"
+  my_secret: "lab13"
